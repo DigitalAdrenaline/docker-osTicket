@@ -47,7 +47,6 @@ RUN pecl install redis-5.3.3 && \
 # Install opcache
 RUN docker-php-ext-enable opcache
 
-
 # Install APCu and APC backward compatibility
 RUN pecl install apcu && docker-php-ext-enable apcu
 
@@ -93,7 +92,6 @@ libkrb5-dev  && \
     rm -rf /var/lib/apt/lists/* && \
     docker-php-ext-configure imap --with-kerberos --with-imap-ssl && \
     docker-php-ext-install imap
-
 
 # Install Freetype 
 RUN apt-get -y update && \

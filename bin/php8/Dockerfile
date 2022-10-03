@@ -80,6 +80,20 @@ RUN docker-php-ext-install pdo_mysql && \
     docker-php-ext-install calendar && \
     docker-php-ext-install exif
 
+# Install opcache
+RUN docker-php-ext-enable opcache
+
+# Install APCu and APC backward compatibility
+RUN pecl install apcu && docker-php-ext-enable apcu
+
+# Install Imap
+RUN apt-get -y update && \
+    apt-get --no-install-recommends install -y libc-client-dev \
+libkrb5-dev  && \
+    rm -rf /var/lib/apt/lists/* && \
+    docker-php-ext-configure imap --with-kerberos --with-imap-ssl && \
+    docker-php-ext-install imap
+
 
 # Install Freetype 
 RUN apt-get -y update && \
